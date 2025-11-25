@@ -1,0 +1,61 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+pip-log.txt
+coverage.xml
+htmlcov/
+.cache/
+.tox/
+.nox/
+.mypy_cache/
+.pytest_cache/
+.dmypy.json
+.pyre/
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs e editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+._*
+
+# Finder
+.Spotlight-V100
+.Trashes
+
+# External assembly files
+.fseventsd
+
+# --- Others ---
+*.sqlite3
+*.db
+*.pid
+*.seed
