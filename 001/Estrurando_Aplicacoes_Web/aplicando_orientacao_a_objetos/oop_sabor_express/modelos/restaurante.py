@@ -1,3 +1,6 @@
+from modelos.avaliacao import Avaliacao
+
+
 class Restaurante:
     # 7 - atributo de classe
     restaurantes = []
@@ -9,6 +12,8 @@ class Restaurante:
         self._categoria = categoria.upper()
         # atributo protegido
         self._ativo = False
+        # 8- criou uma classe avalicao em modelos e agora adicionou no construtor avaliacao
+        self._avaliacao = []
         # 7 - pegou a classe, fez um append na lista de restaurante do proprio restaurante(self) que vai ser criado
         Restaurante.restaurantes.append(self)
 
@@ -33,3 +38,9 @@ class Restaurante:
 
     def alternar_estado(self):
         self._ativo = not self._ativo
+
+    # 9- criou metodo receber avaliacao
+    def receber_avalicao(self, cliente, nota):
+        # objeto da classe Avalicao
+        avaliacao = Avaliacao(cliente, nota)
+        self._avaliacao.append(avaliacao)
