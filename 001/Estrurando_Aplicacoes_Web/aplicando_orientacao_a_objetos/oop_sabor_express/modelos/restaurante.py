@@ -26,10 +26,12 @@ class Restaurante:
     @classmethod
     def listar_restaurantes(cls):
         # colocou entre chaves para manter a formatação :<25
-        print(f"{'Nome do restaurante':<25} | {'Categoria':<25} | {'Status'}")
+        print(
+            f"{'Nome do restaurante':<25} | {'Categoria':<25} | {'Avaliação':<25} | {'Status'}"
+        )
         for restaurante in Restaurante.restaurantes:
             print(
-                f"{restaurante._nome:<25} | {restaurante._categoria:<25} | {restaurante.ativo}"
+                f"{restaurante._nome:<25} | {restaurante._categoria:<25} | {restaurante.media_avaliacoes:<25} | {restaurante.ativo}"
             )
 
     @property
@@ -44,3 +46,15 @@ class Restaurante:
         # objeto da classe Avalicao
         avaliacao = Avaliacao(cliente, nota)
         self._avaliacao.append(avaliacao)
+
+    # 10- fez o metodo e depois transformou em property para ser capaz de ler esse metodo
+    @property
+    def media_avaliacoes(self):
+        if not self._avaliacao:
+            return 0
+        # ternário - pega todas as notas de _avalicao e soma todas as notas
+        soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao)
+        quantidade_notas = len(self._avaliacao)
+        # usou o round para arrendondar e pegar só uma casa com 1
+        media = round(soma_das_notas / quantidade_notas, 1)
+        return media
