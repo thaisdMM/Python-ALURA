@@ -2,37 +2,29 @@ from modelos.avaliacao import Avaliacao
 
 
 class Restaurante:
-    """Representa um restaurante e suas características."""
-
-    # atributo de classe
+    # 7 - atributo de classe
     restaurantes = []
 
-    # construtor
-    def __init__(self, nome: str, categoria: str):
-        """
-        Inicializa uma instância de Restaurante.
-
-        Parâmetros:
-        - nome (str): O nome do restaurante.
-        - categoria (str): A categoria do restaurante.
-        """
+    # construtor - chamado automaticamente quando a classe é instanciada
+    # self é convenção - representa a instância da própria classe
+    def __init__(self, nome, categoria):
         self._nome = nome.title()
         self._categoria = categoria.upper()
         # atributo protegido
         self._ativo = False
-        # para usar a classe avalição na pasta modelos
+        # 8- criou uma classe avalicao em modelos e agora adicionou no construtor avaliacao
         self._avaliacao = []
-        # toda vez que cria um objeto restaurante adiciona à lista
+        # 7 - pegou a classe, fez um append na lista de restaurante do proprio restaurante(self) que vai ser criado
         Restaurante.restaurantes.append(self)
 
+    # método exibe string
     def __str__(self):
-        """Retorna uma representação em string do restaurante."""
         return f"{self._nome} | {self._categoria}"
 
+    # Vai adicionar o @classmethod para dizer que é um método da classe
     # não precisa de instanciar a classe para acessar esses métodos
     @classmethod
     def listar_restaurantes(cls):
-        """Exibe uma lista formatada de todos os restaurantes."""
         # colocou entre chaves para manter a formatação :<25
         print(
             f"{'Nome do restaurante':<25} | {'Categoria':<25} | {'Avaliação':<25} | {'Status'}"
@@ -44,31 +36,25 @@ class Restaurante:
 
     @property
     def ativo(self):
-        """Retorna um símbolo indicando o estado de atividade do restaurante."""
         return "☑" if self._ativo else "☐"
 
     def alternar_estado(self):
-        """Alterna o estado de atividade do restaurante."""
         self._ativo = not self._ativo
 
-    def receber_avalicao(self, cliente: str, nota: float):
-        """
-        Registra uma avaliação para o restaurante.
+    # 9- criou metodo receber avaliacao
+    def receber_avalicao(self, cliente, nota):
+        # objeto da classe Avalicao
 
-        Parâmetros:
-        - cliente (str): O nome do cliente que fez a avaliação.
-        - nota (float): A nota atribuída ao restaurante (entre 1 e 5).
-        """
+        # 12- fazendo uma pequena validação na nota que nao existia
         if 0 < nota <= 5:
-            # objeto da classe Avalicao em modelos
             avaliacao = Avaliacao(cliente, nota)
             self._avaliacao.append(avaliacao)
 
     # 10- fez o metodo e depois transformou em property para ser capaz de ler esse metodo
     @property
     def media_avaliacoes(self):
-        """Calcula e retorna a média das avaliações do restaurante."""
         if not self._avaliacao:
+            # 11- removeu o valor 0 de quando não tem avaliação e colocou -
             return "-"
         # ternário - pega todas as notas de _avalicao e soma todas as notas
         soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao)
